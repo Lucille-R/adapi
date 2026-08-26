@@ -1,0 +1,19 @@
+# Lancer :   docker compose up -d
+# Arrêter :  docker compose down        (les données persistent dans le volume)
+# Reset :    docker compose down -v     (supprime le volume → le dump est rechargé au prochain up)
+services:
+  db:
+    image: postgres:16
+    container_name: adapi-db
+    environment:
+      POSTGRES_USER: lr
+      POSTGRES_PASSWORD: adapi
+      POSTGRES_DB: adapi
+    ports:
+      - "5436:5432"
+    volumes:
+      - ./migration_up.sql:/docker-entrypoint-initdb.d/adapi.sql
+      - adapi-data:/var/lib/postgresql/data
+
+volumes:
+  adapi-data:
