@@ -97,7 +97,7 @@ Toujours depuis le dossier `db/` :
 psql -h localhost -p 5436 -U lr -d adapi -f seed.sql
 ```
 
-Le mot de passe demandé est celui défini dans `docker-compose.yml` (`adapi`).
+Le mot de passe demandé est celui défini dans `docker-compose.yml`.
 
 ### 6. Vérifier l'import
 
