@@ -15,11 +15,11 @@ app.use(express.json());
 
 //============= MONTAGE ROUTES ================
 
-app.use(routerCategories);
-app.use(routerObjets);
-app.use(routerDepots);
-app.use(routerPersonnes);
-app.use(routerStats);
+app.use("/api", routerCategories);
+app.use("/api", routerObjets);
+app.use("/api", routerDepots);
+app.use("/api", routerPersonnes);
+app.use("/api", routerStats);
 
 
 //---------------------------------------------
