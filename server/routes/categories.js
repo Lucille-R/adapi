@@ -3,6 +3,7 @@ import { pool } from "../db.js";
 
 export const routerCategories = express.Router();
 
+// Toutes les catégories
 routerCategories.get("/categories", async (req, res) => {
 	const { rows } = await pool.query(`
 		SELECT id, libelle
