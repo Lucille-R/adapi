@@ -54,8 +54,8 @@ routerObjets.get("/objets/:id", async (req, res) => {
 		`, [id]);
 	
 		if (rows.length === 0) {
-			return res.status(404).json({erreur: `${id} est un id inconnu`});
-		}
+			return res.status(404).json({erreur: `${id} : cet id n'existe pas`});
+		};
 
 		res.status(200).json(rows[0]);
 });
