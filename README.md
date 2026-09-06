@@ -120,16 +120,17 @@ Le serveur démarre sur `http://localhost:3000` (ou le port défini dans `.env`)
 
 | Méthode | Route | Ce qu'elle renvoie | Paramètres attendu | Statut |
 |---|---|---|---|---|
-| GET | `/api/categories` | Liste toutes les catégories (id, libellé) | - | `200` |
-| GET | `/api/objets` | Liste des objets, avec le libellé de leur catégorie | Filtres optionnels et cumulables : `?statut`, `?categorie_id` | `200` / `400` si `statut` invalide |
-| GET | `/api/objets/:id` | Un objet, avec sa catégorie, son dépôt et le nom de sa donatrice | `:id` (identifiant de l'objet) | `200` / `404` |
-| GET | `/api/depots/:id` | Un dépôt, sa donatrice, et la liste des objets qu'il contient | `:id` (identifiant du dépôt) | `200` / `404` |
+| `GET` | `/api/categories` | Liste toutes les catégories (id, libellé) | - | `200` |
+| `GET` | `/api/objets` | Liste des objets, avec le libellé de leur catégorie | Filtres optionnels et cumulables : `?statut`, `?categorie_id` | `200` / `400` si `statut` invalide |
+| `GET` | `/api/objets/:id` | Un objet, avec sa catégorie, son dépôt et le nom de sa donatrice | `:id` (identifiant de l'objet) | `200` / `404` |
+| `GET` | `/api/depots/:id` | Un dépôt, sa donatrice, et la liste des objets qu'il contient | `:id` (identifiant du dépôt) | `200` / `404` |
 
 ### Ecriture
 
 | Méthode | Route | Ce qu'elle renvoie | Paramètres attendu | Statut |
 |---|---|---|---|---|
-| POST | `/api/personnes` | Crée une nouvelle donatrice | Dans le body : `nom`, `prenom`, `telephone` (optionnel), `adhérente` (optionnel, `false` par défaut) | `200` / `400` |
+| `POST` | `/api/personnes` | Crée une nouvelle donatrice | Dans le body : `nom`, `prenom`, `telephone` (optionnel), `adhérente` (optionnel, `false` par défaut) | `201` / `400` |
+| `POST` | `/api/depots` | Crée un nouveau dépôt | Dans le body : `personne_id`, `date_depot`, `type` | `201` / `400` |
 
 
 ## 🧪 Tester l'API
