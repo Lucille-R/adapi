@@ -1,0 +1,4 @@
+@url = http://localhost:3000
+
+### Récupérer toutes les catégories
+GET {{url}}/api/categories
