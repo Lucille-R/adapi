@@ -76,7 +76,7 @@ Le fichier `.env` doit définir les variables suivantes :
 
 Les valeurs correspondant à ton environnement local sont dans `db/docker-compose.yml`.
 
-⚠️ Le fichier `.env` ne doit **jamais** être versionné (il est listé dans `.gitignore`) — c'est là que vivent les vraies valeurs, jamais dans le README.
+⚠️ Le fichier `.env` ne doit **jamais** être versionné (il est listé dans `.gitignore`).
 
 ### 4. Lancer la base de données
 
@@ -116,7 +116,20 @@ Le serveur démarre sur `http://localhost:3000` (ou le port défini dans `.env`)
 
 ## 📡 Routes disponibles
 
-*(à compléter)*
+### Lecture
+
+| Méthode | Route | Ce qu'elle renvoie | Paramètres attendu | Statut |
+|---|---|---|---|---|
+| GET | `/api/categories` | Liste toutes les catégories (id, libellé) | - | `200` |
+| GET | `/api/objets` | Liste des objets, avec le libellé de leur catégorie | Filtres optionnels et cumulables : `?statut`, `?categorie_id` | `200` / `400` si `statut` invalide |
+| GET | `/api/objets/:id` | Un objet, avec sa catégorie, son dépôt et le nom de sa donatrice | `:id` (identifiant de l'objet) | `200` / `404` |
+| GET | `/api/depots/:id` | Un dépôt, sa donatrice, et la liste des objets qu'il contient | `:id` (identifiant du dépôt) | `200` / `404` |
+
+### Ecriture
+
+| Méthode | Route | Ce qu'elle renvoie | Paramètres attendu | Statut |
+|---|---|---|---|---|
+
 
 ## 🧪 Tester l'API
 
