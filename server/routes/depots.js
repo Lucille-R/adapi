@@ -3,6 +3,7 @@ import { pool } from "../db.js";
 
 export const routerDepots = express.Router();
 
+//========================= GET ==============================
 // Un dépôt, sa donatrice, et la liste des objets qu’il contient
 routerDepots.get("/depots/:id", async (req, res) => {
 	const { id } = req.params;
@@ -41,6 +42,8 @@ routerDepots.get("/depots/:id", async (req, res) => {
 });
 
 
+//========================= POST =============================
+
 // Enregistre un dépôt (personne_id, date_depot, type) :
 routerDepots.post("/depots", async (req, res) => {
 	const { personne_id, date_depot, type } = req.body;
@@ -77,4 +80,47 @@ routerDepots.post("/depots", async (req, res) => {
 
 	return res.status(201).json(rows[0]);
 
+});
+
+
+// Ajoute un objet au depot :
+routerDepots.post("/depots/:id/objets", async (req, res) => {
+	const { id } = req.params;
+	const { libelle, poids_kg, etat_arrivee, categorie_id } = req.body;
+	
+	// Gestion des champs obligatoires :
+	if (libelle === undefined || poids_kg === undefined || etat_arrivee === undefined || categorie_id === undefined) {
+		return res.status(400).json({erreur : 'Champ obligatoire manquant'});
+	}
+
+	// On vérifie que depot_id existe :
+	const { rows: rowsDepotId } = await pool.query(`
+		SELECT id
+		FROM depot
+		WHERE id = $1`, [id]);
+		if (rowsDepotId.length === 0) {
+			return res.status(400).json({erreur: `${id} : cet id de depot n'existe pas`});
+		}
+	
+	// Liste blanche des ENUM etat_arrivee :
+	const ETAT = ['bon_etat', 'a_reparer', 'hors_service'];
+	if (!ETAT.includes(etat_arrivee)) {
+		return res.status(400).json({ erreur: `etat doit valoir : ${ETAT.join(', ')}`
+	});
+	}
+
+	// Vérif. que poids_kg est un nombre :
+	if (typeof poids_kg !== "number") {
+		return res.status(400).json({erreur: `poids_kg doit être un nombre`});
+	}
+
+	// Requête d'insertion dans la base :
+	const { rows } = await pool.query(`
+		INSERT INTO objet (libelle, poids_kg, etat_arrivee, categorie_id, depot_id)
+		VALUES ($1, $2, $3::etat_objet, $4::integer, $5::integer)
+		RETURNING *`,
+		[libelle, poids_kg, etat_arrivee, categorie_id, id]
+	);
+
+	return res.status(201).json(rows[0]);
 });

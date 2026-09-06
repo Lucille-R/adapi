@@ -9,6 +9,7 @@ GET {{url}}/api/depots/9999
 
 
 ###================== POST ======================
+###---------- Enregistre un dépôt ---------
 ### Créer un dépôt valide (personne_id existant, type valide)
 POST {{url}}/api/depots
 Content-Type: application/json
@@ -46,4 +47,60 @@ Content-Type: application/json
 	"personne_id": 1,
 	"date_depot": "2026-09-06",
 	"type": "asso"
+}
+
+
+###---------- Ajoute un objet au dépôt ---------
+### Ajouter un objet à un dépôt existant
+POST {{url}}/api/depots/1/objets
+Content-Type: application/json
+
+{
+  "libelle": "Chaise en bois",
+  "poids_kg": 3.5,
+  "etat_arrivee": "bon_etat",
+  "categorie_id": 1
+}
+
+### Cas d'erreur : champ obligatoire manquant (libelle absent) → doit renvoyer 400
+POST {{url}}/api/depots/1/objets
+Content-Type: application/json
+
+{
+  "poids_kg": 3.5,
+  "etat_arrivee": "bon_etat",
+  "categorie_id": 1
+}
+
+### Cas d'erreur : dépôt inexistant → doit renvoyer 400
+POST {{url}}/api/depots/9999/objets
+Content-Type: application/json
+
+{
+  "libelle": "Chaise en bois",
+  "poids_kg": 3.5,
+  "etat_arrivee": "bon_etat",
+  "categorie_id": 1
+}
+
+### Cas d'erreur : etat_arrivee invalide → doit renvoyer 400
+POST {{url}}/api/depots/1/objets
+Content-Type: application/json
+
+{
+  "libelle": "Chaise en bois",
+  "poids_kg": 3.5,
+  "etat_arrivee": "cassee",
+  "categorie_id": 1
+}
+
+### Cas d'erreur : poids_kg envoyé comme une chaîne (pas un nombre) → doit renvoyer 400
+POST {{url}}/api/depots/1/objets
+Content-Type: application/json
+
+{
+  "libelle": "Chaise en bois",
+  "poids_kg": "3.5",
+  "etat_arrivee": "bon_etat",
+  "categorie_id": 1
 }

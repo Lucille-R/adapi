@@ -131,6 +131,7 @@ Le serveur démarre sur `http://localhost:3000` (ou le port défini dans `.env`)
 |---|---|---|---|---|
 | `POST` | `/api/personnes` | Crée une nouvelle donatrice | Dans le body : `nom`, `prenom`, `telephone` (optionnel), `adhérente` (optionnel, `false` par défaut) | `201` / `400` |
 | `POST` | `/api/depots` | Crée un nouveau dépôt | Dans le body : `personne_id`, `date_depot`, `type` | `201` / `400` |
+| `POST` | `/api/depots/:id/objets` | Ajoute un objet à un dépôt existant | `:id` (identifiant du dépôt) + Dans le body : `libelle`, `poids_kg`, `etat_arrivee`, `categorie_id` | `201` / `400` |
 
 
 ## 🧪 Tester l'API
