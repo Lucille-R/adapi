@@ -1,5 +1,14 @@
 @url = http://localhost:3000
 
+###=================== GET ======================
+### Récupérer un dépôt existant (avec sa donatrice et ses objets)
+GET {{url}}/api/depots/1
+
+### Cas d'erreur : id inexistant → doit renvoyer 404
+GET {{url}}/api/depots/9999
+
+
+###================== POST ======================
 ### Créer un dépôt valide (personne_id existant, type valide)
 POST {{url}}/api/depots
 Content-Type: application/json
