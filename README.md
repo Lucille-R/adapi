@@ -129,6 +129,7 @@ Le serveur démarre sur `http://localhost:3000` (ou le port défini dans `.env`)
 
 | Méthode | Route | Ce qu'elle renvoie | Paramètres attendu | Statut |
 |---|---|---|---|---|
+| POST | `/api/personnes` | Crée une nouvelle donatrice | Dans le body : `nom`, `prenom`, `telephone` (optionnel), `adhérente` (optionnel, `false` par défaut) | `200` / `400` |
 
 
 ## 🧪 Tester l'API

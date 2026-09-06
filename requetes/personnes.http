@@ -1,0 +1,37 @@
+@url = http://localhost:3000
+
+### Créer un personne complète :
+POST {{url}}/api/personnes
+Content-Type: application/json
+
+{
+	"nom": "Dupont",
+	"prenom": "Marie",
+	"telephone": "0612345678",
+	"adherente": true
+}
+
+### Créer une personne sans téléphone, non adhérente :
+POST {{url}}/api/personnes
+Content-Type: application/json
+
+{
+	"nom": "Martin",
+	"prenom": "Julie"
+}
+
+### Cas d'erreur : nom manquant :
+POST {{url}}/api/personnes
+Content-Type: application/json
+
+{
+	"prenom": "Paul"
+}
+
+### Cas d'erreur : prénom manquant :
+POST {{url}}/api/personnes
+Content-Type: application/json
+
+{
+	"nom": "Durand"
+}
