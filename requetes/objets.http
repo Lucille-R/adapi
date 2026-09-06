@@ -1,0 +1,22 @@
+@url = http://localhost:3000
+
+### Récupérer tous les objets (sans filtre)
+GET {{url}}/api/objets
+
+### Filtrer par statut
+GET {{url}}/api/objets?statut=en_rayon
+
+### Filtrer par categorie_id
+GET {{url}}/api/objets?categorie_id=1
+
+### Filtrer par statut ET categorie_id (cumulé)
+GET {{url}}/api/objets?statut=en_rayon&categorie_id=1
+
+### Cas d'erreur : statut invalide → doit renvoyer 400
+GET {{url}}/api/objets?statut=abcde
+
+### Récupérer un objet existant (avec sa catégorie, son dépôt et sa donatrice)
+GET {{url}}/api/objets/1
+
+### Cas d'erreur : id inexistant → doit renvoyer 404
+GET {{url}}/api/objets/9999
