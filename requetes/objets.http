@@ -1,5 +1,6 @@
 @url = http://localhost:3000
 
+###=================== GET ======================
 ### Récupérer tous les objets (sans filtre)
 GET {{url}}/api/objets
 
@@ -20,3 +21,46 @@ GET {{url}}/api/objets/1
 
 ### Cas d'erreur : id inexistant → doit renvoyer 404
 GET {{url}}/api/objets/9999
+
+
+###================== PATCH ======================
+### Faire évoluer le statut ET le prix d'un objet
+PATCH {{url}}/api/objets/1/statut
+Content-Type: application/json
+
+{
+	"statut": "vendu",
+	"prix": 12.5
+}
+
+### Faire évoluer le statut d'un objet (sans prix)
+PATCH {{url}}/api/objets/4/statut
+Content-Type: application/json
+
+{
+	"statut": "en_rayon"
+}
+
+### Cas d'erreur : statut manquant → doit renvoyer 400
+PATCH {{url}}/api/objets/26/statut
+Content-Type: application/json
+
+{
+	"prix": 13
+}
+
+### Cas d'erreur : statut invalide → doit renvoyer 400
+PATCH {{url}}/api/objets/1/statut
+Content-Type: application/json
+
+{
+  "statut": "perdu"
+}
+
+### Cas d'erreur : id inexistant → doit renvoyer 404
+PATCH {{url}}/api/objets/9999/statut
+Content-Type: application/json
+
+{
+  "statut": "en_rayon"
+}
