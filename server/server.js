@@ -7,6 +7,7 @@ import { routerDepots } from "./routes/depots.js";
 import { routerPersonnes } from "./routes/personnes.js";
 import { routerStats } from "./routes/stats.js";
 
+
 //============= MIDDLEWARE ====================
 
 const app = express();
@@ -22,10 +23,16 @@ app.use("/api", routerPersonnes);
 app.use("/api", routerStats);
 
 
-//---------------------------------------------
+//============= MIDDLEWARE D'ERREUR ================
+
+app.use((err, req, res, next) => {
+  console.error('[erreur]', err.message);
+  return res.status(500).json({ erreur: 'Une erreur est survenue' });
+});
 
 
-//---------------------------------------------
+//============= DÉMARRAGE DU SERVEUR ================
+
 app.listen(process.env.PORT, () => {
 	console.log("Serveur sur http://localhost:3000");
 });
