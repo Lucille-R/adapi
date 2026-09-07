@@ -1,10 +1,10 @@
 # 📦 Adapi
 
-API REST de La Remise — construite avec Node.js, Express et PostgreSQL (driver `pg`, sans ORM).
+API REST de La Remise — construite avec Node.js, Express et PostgreSQL.
 
 ## 📝 Description
 
-Adapi expose les données de La Remise (objets, catégories, dépôts, personnes) via une API REST en JSON. C'est le back-end qui sera repris en S15 pour AdaRemise, l'application complète avec son interface React.
+Adapi expose les données de La Remise (objets, catégories, dépôts, personnes) via une API REST en JSON. C'est le back-end qui sera repris plus tard pour AdaRemise, l'application complète avec son interface React.
 
 ## 🛠️ Technologies utilisées
 
@@ -29,6 +29,11 @@ adapi/
 │   ├── seed.sql
 │   └── queries.sql
 ├── requetes/
+│   ├── categories.http
+│   ├── depots.http
+│   ├── objets.http
+│   ├── personnes.http
+│   ├── stats.http
 └── server/
     ├── server.js
     ├── db.js
@@ -57,7 +62,7 @@ npm install
 
 ### 3. Configurer les variables d'environnement
 
-Un fichier `.env.example` est fourni comme modèle. Duplique-le en `.env` à la racine du projet :
+Un fichier `.env.example` est fourni comme modèle. Dupliquez-le en `.env` à la racine du projet :
 
 ```bash
 cp .env.example .env
@@ -74,7 +79,7 @@ Le fichier `.env` doit définir les variables suivantes :
 | `DB_NAME` | Nom de la base |
 | `PORT` | Port sur lequel le serveur Express écoute |
 
-Les valeurs correspondant à ton environnement local sont dans `db/docker-compose.yml`.
+Les valeurs correspondant à votre environnement local sont dans `db/docker-compose.yml`.
 
 ⚠️ Le fichier `.env` ne doit **jamais** être versionné (il est listé dans `.gitignore`).
 
@@ -101,7 +106,7 @@ Le mot de passe demandé est celui défini dans `docker-compose.yml`.
 
 ### 6. Vérifier l'import
 
-Le jeu de données doit contenir 79 objets, 30 dépôts et 22 personnes, dont 32 objets en rayon. Si ces nombres ne correspondent pas, l'import s'est mal passé.
+Le jeu de données doit contenir au moins 79 objets, 30 dépôts et 22 personnes, dont au moins 32 objets en rayon. Si ces nombres ne correspondent pas, l'import s'est mal passé.
 
 ### 7. Démarrer le serveur
 
@@ -136,7 +141,29 @@ Le serveur démarre sur `http://localhost:3000` (ou le port défini dans `.env`)
 
 ## 🧪 Tester l'API
 
-*(à compléter)*
+Les requêtes de test sont écrites avec l'extension **REST Client** de VS Code, et versionnées dans le dossier `requetes/`.
+
+### Installation de l'extension
+
+Dans VS Code, installez l'extension **REST Client** (par Huachao Mao) depuis le marketplace.
+
+### Utilisation
+
+1. Assurez-vous que le serveur est démarré (`npm run dev`)
+2. Ouvrez un fichier `.http` dans `requetes/`
+3. Un lien **"Send Request"** apparaît au-dessus de chaque requête — cliquez dessus pour l'exécuter
+4. La réponse (statut, headers, JSON) s'affiche dans un panneau à côté
+
+### Fichiers disponibles
+
+| Fichier | Couvre |
+|---|---|
+| `categories.http` | `GET /api/categories` |
+| `objets.http` | `GET /api/objets` (avec filtres), `GET /api/objets/:id`, `POST /api/depots/:id/objets` |
+| `depots.http` | `GET /api/depots/:id`, `POST /api/depots` |
+| `personnes.http` | `POST /api/personnes` |
+
+Chaque fichier couvre au moins un cas nominal et un ou plusieurs cas d'erreur (id inexistant, champ manquant, valeur d'enum invalide).
 
 ## 👤 Auteure
 
