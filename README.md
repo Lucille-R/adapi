@@ -3,6 +3,7 @@
 API REST de La Remise — construite avec Node.js, Express et PostgreSQL.
 
 ## 📝 Description
+*Projet réalisé dans le cadre de la formation Concepteur Développeur d'Applications à Ada Tech School.*
 
 Adapi expose les données de La Remise (objets, catégories, dépôts, personnes) via une API REST en JSON. C'est le back-end qui sera repris plus tard pour AdaRemise, l'application complète avec son interface React.
 
@@ -167,8 +168,8 @@ Chaque fichier couvre au moins un cas nominal et un ou plusieurs cas d'erreur (i
 
 ## 👤 Auteure
 
-- **Lucille** — Étudiante chez Ada Tech School
+- **Lucille Richard** - Étudiante chez Ada Tech School
 
 ## 📄 Licence
 
-Projet réalisé dans un cadre pédagogique — Ada Tech School.
+Projet réalisé dans un cadre pédagogique - Ada Tech School.
