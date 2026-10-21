@@ -168,8 +168,8 @@ Chaque fichier couvre au moins un cas nominal et un ou plusieurs cas d'erreur (i
 
 ## 👤 Auteure
 
-- **Lucille Richard** - Étudiante chez Ada Tech School
+- **Lucille Richard** · [LinkedIn](https://www.linkedin.com/in/lucille-richard) · Étudiante chez Ada Tech School
 
-## 📄 Licence
+## 🎓 Contexte
 
-Projet réalisé dans un cadre pédagogique - Ada Tech School.
+Projet réalisé dans un cadre pédagogique · Ada Tech School
